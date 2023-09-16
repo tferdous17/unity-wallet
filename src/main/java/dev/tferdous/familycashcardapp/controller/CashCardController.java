@@ -4,6 +4,8 @@ import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,5 +22,10 @@ public class CashCardController {
     @GetMapping
     public List<CashCard> getCashCards() {
         return cashCardService.getCashCards();
+    }
+
+    @PostMapping
+    public void createCashCard(@RequestBody CashCard card) {
+        cashCardService.createCashCard(card);
     }
 }
