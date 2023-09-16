@@ -19,4 +19,8 @@ public class CashCardService {
     public List<CashCard> getCashCards() {
         return repository.findAll();
     }
+
+    public void createCashCard(CashCard card) {
+        repository.save(card);
+    }
 }
