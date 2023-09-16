@@ -1,4 +1,4 @@
-package dev.tferdous.familycashcardapp.cashcard;
+package dev.tferdous.familycashcardapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
