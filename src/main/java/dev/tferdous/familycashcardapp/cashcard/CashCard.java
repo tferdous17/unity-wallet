@@ -1,6 +1,15 @@
 package dev.tferdous.familycashcardapp.cashcard;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
 public class CashCard {
+    @Id
     private Long id;
     private Double amount;
     private String owner;
