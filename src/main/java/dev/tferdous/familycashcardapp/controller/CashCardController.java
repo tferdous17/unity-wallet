@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CashCardController {
-    private CashCardService cashCardService;
+    private final CashCardService cashCardService;
 
     @Autowired
     public CashCardController(CashCardService cashCardService) {
