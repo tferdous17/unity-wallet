@@ -3,14 +3,12 @@ package dev.tferdous.familycashcardapp.controller;
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("fcc/v1")
 public class CashCardController {
     private final CashCardService cashCardService;
 
