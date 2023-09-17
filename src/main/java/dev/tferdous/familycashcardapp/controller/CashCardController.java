@@ -3,9 +3,11 @@ package dev.tferdous.familycashcardapp.controller;
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("cashcards/v1")
@@ -17,9 +19,10 @@ public class CashCardController {
         this.cashCardService = cashCardService;
     }
 
-    @GetMapping
-    public List<CashCard> getCashCards() {
-        return cashCardService.getCashCards();
+    @GetMapping("/{requestedId}")
+    public ResponseEntity<CashCard> getCashCards(@PathVariable Long requestedId) {
+        Optional<CashCard> cashCardOptional = cashCardService.findById(requestedId);
+        return cashCardOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
