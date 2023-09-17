@@ -14,12 +14,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class CashCardControllerTest {
     @Autowired
     TestRestTemplate restTemplate;
+    CashCard card = new CashCard(104.51, "John Doe");
 
     @Test
     void shouldCreateANewCashCard() {
-        CashCard card = new CashCard(104.51, "John Doe");
         ResponseEntity<Void> createResponse = restTemplate.postForEntity("/cashcards/v1", card, Void.class);
         assertSame(createResponse.getStatusCode(), HttpStatus.CREATED);
+    }
+
+    @Test
+    void shouldReturnNotFoundForUnknownId() {
+        ResponseEntity<String> getResponse = restTemplate.getForEntity("/cashcards/v1/100", String.class);
+        assertSame(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
 }
