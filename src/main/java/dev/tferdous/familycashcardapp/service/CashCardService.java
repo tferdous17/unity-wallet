@@ -21,8 +21,8 @@ public class CashCardService {
         return repository.findAll();
     }
 
-    public void createCashCard(CashCard card) {
-        repository.save(card);
+    public CashCard createCashCard(CashCard card) {
+        return repository.save(card);
     }
 
     public Optional<CashCard> findById(Long requestedId) {
