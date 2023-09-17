@@ -5,7 +5,9 @@ import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +28,13 @@ public class CashCardController {
     }
 
     @PostMapping
-    public void createCashCard(@RequestBody CashCard card) {
-        cashCardService.createCashCard(card);
+    private ResponseEntity<Void> createCashCard(@RequestBody CashCard card, UriComponentsBuilder ucb) {
+        CashCard newCard = cashCardService.createCashCard(card);
+        URI locationOfNewCard = ucb
+                .path("cashcards/v1/{id}")
+                .buildAndExpand(newCard.getId())
+                .toUri();
+        return ResponseEntity.created(locationOfNewCard).build();
     }
 
 }
