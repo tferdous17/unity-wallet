@@ -17,7 +17,7 @@ public class CashCard {
     @Column(nullable = false)
     private Double amount;
 
-    @Column(columnDefinition = "String", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String owner;
 
     public CashCard() {}
