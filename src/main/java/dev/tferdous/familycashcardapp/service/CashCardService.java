@@ -3,6 +3,7 @@ package dev.tferdous.familycashcardapp.service;
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.repository.CashCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,5 +28,9 @@ public class CashCardService {
 
     public Optional<CashCard> findById(Long requestedId) {
         return repository.findById(requestedId);
+    }
+
+    public List<CashCard> getAllCards() {
+        return repository.findAll();
     }
 }
