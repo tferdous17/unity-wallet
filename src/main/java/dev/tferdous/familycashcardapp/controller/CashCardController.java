@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("fcc/v1")
+@RequestMapping("cashcards/v1")
 public class CashCardController {
     private final CashCardService cashCardService;
 
@@ -26,4 +26,5 @@ public class CashCardController {
     public void createCashCard(@RequestBody CashCard card) {
         cashCardService.createCashCard(card);
     }
+
 }
