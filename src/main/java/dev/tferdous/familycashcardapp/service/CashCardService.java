@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CashCardService {
@@ -22,5 +23,9 @@ public class CashCardService {
 
     public void createCashCard(CashCard card) {
         repository.save(card);
+    }
+
+    public Optional<CashCard> findById(Long requestedId) {
+        return repository.findById(requestedId);
     }
 }
