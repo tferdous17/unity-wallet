@@ -27,6 +27,11 @@ public class CashCardController {
         return cashCardOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping
+    public ResponseEntity<List<CashCard>> getAllCards() {
+        return ResponseEntity.ok(cashCardService.getAllCards());
+    }
+
     @PostMapping
     private ResponseEntity<Void> createCashCard(@RequestBody CashCard card, UriComponentsBuilder ucb) {
         CashCard newCard = cashCardService.createCashCard(card);
