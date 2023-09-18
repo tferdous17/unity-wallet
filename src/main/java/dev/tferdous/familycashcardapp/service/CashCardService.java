@@ -1,5 +1,6 @@
 package dev.tferdous.familycashcardapp.service;
 
+import dev.tferdous.familycashcardapp.exceptions.CashCardNotFoundException;
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.repository.CashCardRepository;
 import jakarta.transaction.Transactional;
@@ -41,6 +42,6 @@ public class CashCardService {
             cardToUpdate.setAmount(card.getAmount());
             cardToUpdate.setOwner(card.getOwner());
             return cardToUpdate;
-        });
+        }).orElseThrow(() -> new CashCardNotFoundException(id));
     }
 }
