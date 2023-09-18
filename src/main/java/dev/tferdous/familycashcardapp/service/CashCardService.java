@@ -44,4 +44,12 @@ public class CashCardService {
             return cardToUpdate;
         }).orElseThrow(() -> new CashCardNotFoundException(id));
     }
+
+    public void deleteCard(Long id) {
+        if (repository.findById(id).isEmpty()) {
+            throw new CashCardNotFoundException(id);
+        } else {
+            repository.findById(id).ifPresent(repository::delete);
+        }
+    }
 }
