@@ -2,6 +2,7 @@ package dev.tferdous.familycashcardapp.service;
 
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.repository.CashCardRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,14 @@ public class CashCardService {
 
     public List<CashCard> getAllCards() {
         return repository.findAll();
+    }
+
+    @Transactional
+    public void updateCard(Long id, String amount, String owner) {
+        Optional<CashCard> cardToUpdate = repository.findById(id);
+        cardToUpdate.ifPresent(card -> {
+            card.setAmount(Double.parseDouble(amount));
+            card.setOwner(owner);
+        });
     }
 }
