@@ -47,4 +47,9 @@ public class CashCardController {
     private void updateCard(@PathVariable Long id, @RequestBody CashCard card) {
         cashCardService.updateCard(id, card);
     }
+
+    @DeleteMapping(path = "{id}")
+    private void deleteCard(@PathVariable Long id) {
+        cashCardService.deleteCard(id);
+    }
 }
