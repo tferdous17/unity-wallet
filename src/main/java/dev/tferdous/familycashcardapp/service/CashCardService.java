@@ -36,11 +36,11 @@ public class CashCardService {
     }
 
     @Transactional
-    public void updateCard(Long id, String amount, String owner) {
-        Optional<CashCard> cardToUpdate = repository.findById(id);
-        cardToUpdate.ifPresent(card -> {
-            card.setAmount(Double.parseDouble(amount));
-            card.setOwner(owner);
+    public void updateCard(Long id, CashCard card) {
+        repository.findById(id).map(cardToUpdate -> {
+            cardToUpdate.setAmount(card.getAmount());
+            cardToUpdate.setOwner(card.getOwner());
+            return cardToUpdate;
         });
     }
 }
