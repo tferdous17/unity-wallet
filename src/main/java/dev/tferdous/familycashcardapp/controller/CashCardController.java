@@ -44,9 +44,7 @@ public class CashCardController {
     }
 
     @PutMapping(path = "{id}")
-    private void updateCard(@PathVariable Long id,
-                            @RequestParam(name = "amount") String amount,
-                            @RequestParam(name = "owner") String owner) {
-        cashCardService.updateCard(id, amount, owner);
+    private void updateCard(@PathVariable Long id, @RequestBody CashCard card) {
+        cashCardService.updateCard(id, card);
     }
 }
