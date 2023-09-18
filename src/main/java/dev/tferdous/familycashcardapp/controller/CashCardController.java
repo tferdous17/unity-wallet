@@ -2,6 +2,7 @@ package dev.tferdous.familycashcardapp.controller;
 
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,4 +43,10 @@ public class CashCardController {
         return ResponseEntity.created(locationOfNewCard).build();
     }
 
+    @PutMapping(path = "{id}")
+    private void updateCard(@PathVariable Long id,
+                            @RequestParam(name = "amount") String amount,
+                            @RequestParam(name = "owner") String owner) {
+        cashCardService.updateCard(id, amount, owner);
+    }
 }
