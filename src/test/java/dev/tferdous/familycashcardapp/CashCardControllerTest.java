@@ -16,6 +16,15 @@ class CashCardControllerTest {
     TestRestTemplate restTemplate;
     CashCard card = new CashCard(104.51, "John Doe");
 
+
+    @Test
+    void shouldReturnCashCardDataForExisingCard() {
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth("johndoe", "apple123")
+                .getForEntity("/cashcards/v1/1", String.class);
+        assertSame(response.getStatusCode(), HttpStatus.OK);
+    }
+
     @Test
     void shouldCreateANewCashCard() {
         ResponseEntity<Void> createResponse = restTemplate.postForEntity("/cashcards/v1", card, Void.class);
