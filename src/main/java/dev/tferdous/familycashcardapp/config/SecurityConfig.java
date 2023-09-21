@@ -43,4 +43,11 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
      }
 
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+        User.UserBuilder users = User.builder();
+        UserDetails johnDoe = users.username("johndoe").password(passwordEncoder.encode("apple123")).build();
+        return new InMemoryUserDetailsManager(johnDoe);
+    }
+
 }
