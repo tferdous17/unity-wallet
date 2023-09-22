@@ -50,7 +50,8 @@ public class CashCardController {
     }
 
     @DeleteMapping(path = "{id}")
-    private void deleteCard(@PathVariable Long id) {
+    private ResponseEntity<Void> deleteCard(@PathVariable Long id) {
         cashCardService.deleteCard(id);
+        return ResponseEntity.noContent().build();
     }
 }
