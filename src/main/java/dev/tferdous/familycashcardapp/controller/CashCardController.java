@@ -4,6 +4,7 @@ import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,8 +30,8 @@ public class CashCardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CashCard>> getAllCards() {
-        return ResponseEntity.ok(cashCardService.getAllCards());
+    public ResponseEntity<List<CashCard>> getAllCashCards(Pageable pageable) {
+        return ResponseEntity.ok(cashCardService.getAllCashCards(pageable));
     }
 
     @PostMapping
