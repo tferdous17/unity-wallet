@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CashCardService {
     private final CashCardRepository repository;
 
@@ -36,7 +37,6 @@ public class CashCardService {
         return repository.findAll();
     }
 
-    @Transactional
     public void updateCard(Long id, CashCard card) {
         repository.findById(id).map(cardToUpdate -> {
             cardToUpdate.setAmount(card.getAmount());
