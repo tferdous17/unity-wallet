@@ -5,6 +5,9 @@ import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.repository.CashCardRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +54,10 @@ public class CashCardService {
         } else {
             repository.findById(id).ifPresent(repository::delete);
         }
+    }
+
+    public List<CashCard> getAllCashCards(Pageable pageable) {
+        Page<CashCard> page = repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
+        return page.getContent();
     }
 }
