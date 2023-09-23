@@ -26,7 +26,7 @@ public class SecurityConfig {
      public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
             auth.requestMatchers(HttpMethod.GET, this.baseUrl).permitAll()
-                    .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").hasRole("CARD-OWNER")
                     .requestMatchers(HttpMethod.POST, this.baseUrl).hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasRole("ADMIN");
@@ -42,9 +42,9 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails johnDoe = User.builder()
-                .username("johnDoe")
-                .password(passwordEncoder().encode("apple123"))
-                .roles("USER")
+                .username("john_doe")
+                .password(passwordEncoder().encode("apples123"))
+                .roles("CARD-OWNER")
                 .build();
 
         UserDetails admin = User.builder()
