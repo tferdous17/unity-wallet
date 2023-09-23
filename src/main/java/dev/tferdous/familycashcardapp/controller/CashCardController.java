@@ -2,7 +2,6 @@ package dev.tferdous.familycashcardapp.controller;
 
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public class CashCardController {
     }
 
     @GetMapping("/{requestedId}")
-    public ResponseEntity<CashCard> getCashCards(@PathVariable Long requestedId) {
-        Optional<CashCard> cashCardOptional = cashCardService.findById(requestedId);
+    public ResponseEntity<CashCard> getCashCardById(@PathVariable Long requestedId, Principal principal) {
+        Optional<CashCard> cashCardOptional = cashCardService.findByIdAndOwner(requestedId, principal.getName());
         return cashCardOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
