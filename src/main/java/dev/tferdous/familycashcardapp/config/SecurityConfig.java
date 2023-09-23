@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(johnDoe, admin);
+        return new InMemoryUserDetailsManager(johnDoe, janeDoe, admin);
     }
 
 }
