@@ -60,4 +60,8 @@ public class CashCardService {
         Page<CashCard> page = repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
         return page.getContent();
     }
+
+    public Optional<CashCard> findByIdAndOwner(Long requestedId, String name) {
+        return Optional.ofNullable(repository.findByIdAndOwner(requestedId, name));
+    }
 }
