@@ -45,4 +45,12 @@ class CashCardControllerTest {
         assertSame(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
+    @Test
+    void shouldAllowAccessToOwnedCard() {
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth("john_doe", "apples123")
+                .getForEntity("/cashcards/v1/80", String.class);
+        assertSame(response.getStatusCode(), HttpStatus.OK);
+    }
+
 }
