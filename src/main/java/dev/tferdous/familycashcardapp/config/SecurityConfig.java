@@ -27,7 +27,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
             auth.requestMatchers(HttpMethod.GET, this.baseUrl).permitAll()
                     .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").permitAll()
-                    .anyRequest().authenticated();
+                    .requestMatchers(HttpMethod.POST, this.baseUrl).hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasRole("ADMIN");
         }).httpBasic(Customizer.withDefaults());
         return http.build();
     }
