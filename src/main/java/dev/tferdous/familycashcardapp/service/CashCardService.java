@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,12 +43,13 @@ public class CashCardService {
         return repository.findAll();
     }
 
-    public void updateCard(Long id, CashCard card) {
-        repository.findById(id).map(cardToUpdate -> {
+    public ResponseEntity<Void> updateCard(Long id, CashCard card, Principal principal) {
+        CashCard cardToUpdate = repository.findByIdAndOwner(id, principal.getName());
+        if (cardToUpdate != null) {
             cardToUpdate.setAmount(card.getAmount());
-            cardToUpdate.setOwner(card.getOwner());
-            return cardToUpdate;
-        }).orElseThrow(() -> new CashCardNotFoundException(id));
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public void deleteCard(Long id) {
