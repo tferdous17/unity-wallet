@@ -53,8 +53,7 @@ public class CashCardController {
     }
 
     @DeleteMapping(path = "{id}")
-    private ResponseEntity<Void> deleteCard(@PathVariable Long id) {
-        cashCardService.deleteCard(id);
-        return ResponseEntity.noContent().build();
+    private ResponseEntity<Void> deleteCard(@PathVariable Long id, Principal principal) {
+        return cashCardService.deleteCard(id, principal);
     }
 }
