@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +58,11 @@ public class CashCardService {
     }
 
     public Page<CashCard> getAllCashCardsByOwner(String owner, Pageable pageable) {
-        return repository.findByOwner(owner, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
+        return repository.findByOwner(owner, PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                pageable.getSortOr(Sort.by(Sort.Direction.DESC, "amount")))
+        );
     }
 
     public Optional<CashCard> findByIdAndOwner(Long requestedId, String name) {
