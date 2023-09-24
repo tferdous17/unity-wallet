@@ -56,9 +56,8 @@ public class CashCardService {
         }
     }
 
-    public List<CashCard> getAllCashCards(Pageable pageable) {
-        Page<CashCard> page = repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
-        return page.getContent();
+    public Page<CashCard> getAllCashCardsByOwner(String owner, Pageable pageable) {
+        return repository.findByOwner(owner, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
     }
 
     public Optional<CashCard> findByIdAndOwner(Long requestedId, String name) {
