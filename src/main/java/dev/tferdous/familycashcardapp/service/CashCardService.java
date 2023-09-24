@@ -52,12 +52,13 @@ public class CashCardService {
         return ResponseEntity.notFound().build();
     }
 
-    public void deleteCard(Long id) {
-        if (repository.findById(id).isEmpty()) {
-            throw new CashCardNotFoundException(id);
-        } else {
-            repository.findById(id).ifPresent(repository::delete);
+    public ResponseEntity<Void> deleteCard(Long id, Principal principal) {
+        CashCard cardToDelete = repository.findByIdAndOwner(id, principal.getName());
+        if (cardToDelete != null) {
+            repository.delete(cardToDelete);
+            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     public Page<CashCard> getAllCashCardsByOwner(String owner, Pageable pageable) {
