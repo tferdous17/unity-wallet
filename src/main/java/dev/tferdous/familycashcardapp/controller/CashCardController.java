@@ -48,8 +48,8 @@ public class CashCardController {
     }
 
     @PutMapping(path = "{id}")
-    private void updateCard(@PathVariable Long id, @RequestBody CashCard card) {
-        cashCardService.updateCard(id, card);
+    private ResponseEntity<Void> updateCard(@PathVariable Long id, @RequestBody CashCard card, Principal principal) {
+        return cashCardService.updateCard(id, card, principal);
     }
 
     @DeleteMapping(path = "{id}")
