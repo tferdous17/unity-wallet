@@ -3,6 +3,8 @@ package dev.tferdous.familycashcardapp.controller;
 import dev.tferdous.familycashcardapp.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +32,9 @@ public class CashCardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CashCard>> getAllCashCards(Pageable pageable) {
-        return ResponseEntity.ok(cashCardService.getAllCashCards(pageable));
+    public ResponseEntity<List<CashCard>> getAllCashCards(Principal principal, Pageable pageable) {
+        Page<CashCard> page = cashCardService.getAllCashCardsByOwner(principal.getName(), pageable);
+        return ResponseEntity.ok(page.getContent());
     }
 
     @PostMapping
