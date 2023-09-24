@@ -28,8 +28,8 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, this.baseUrl).hasRole("CARD-OWNER")
                     .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").hasRole("CARD-OWNER")
                     .requestMatchers(HttpMethod.POST, this.baseUrl).hasRole("CARD-OWNER")
-                    .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasRole("ADMIN");
+                    .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasRole("CARD-OWNER")
+                    .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasRole("CARD-OWNER");
         }).httpBasic(Customizer.withDefaults());
         return http.build();
     }
@@ -53,13 +53,19 @@ public class SecurityConfig {
                 .roles("CARD-OWNER")
                 .build();
 
+        UserDetails blake2 = User.builder()
+                .username("blake2")
+                .password(passwordEncoder.encode("blake123"))
+                .roles("CARD-OWNER")
+                .build();
+
         UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(johnDoe, janeDoe, admin);
+        return new InMemoryUserDetailsManager(johnDoe, blake2, janeDoe, admin);
     }
 
 }
