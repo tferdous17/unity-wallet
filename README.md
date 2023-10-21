@@ -5,6 +5,7 @@ Unity Wallet is a modern financial management solution designed for families who
 ## Technologies
 - Java 17
 - Spring Boot 3.0
+- Spring Security
 - Lombok
 - Maven
 - JUnit
