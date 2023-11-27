@@ -56,15 +56,29 @@ public class CashCardService {
         return repository.findById(requestedId);
     }
 
+    /**
+     * Updates any CashCard if its owned by a particular person
+     * Only the cash amount is update-able
+     * @param id ID of CashCard
+     * @param card CashCard being used to update current card with
+     * @param principal Entity for cash card owner
+     * @return status code 204 if success else 404
+     */
     public ResponseEntity<Void> updateCard(Long id, CashCard card, Principal principal) {
         CashCard cardToUpdate = repository.findByIdAndOwner(id, principal.getName());
         if (cardToUpdate != null) {
             cardToUpdate.setAmount(card.getAmount());
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build(); // request successfully completed but no msg body
         }
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Deletes a card owner's CashCard
+     * @param id ID of card to delete
+     * @param principal Entity for cash card owner
+     * @return status code 204 if success else 404
+     */
     public ResponseEntity<Void> deleteCard(Long id, Principal principal) {
         CashCard cardToDelete = repository.findByIdAndOwner(id, principal.getName());
         if (cardToDelete != null) {
@@ -74,6 +88,12 @@ public class CashCardService {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Retrieves page of all cash cards owned by a particular person
+     * @param owner Owner of cash cards
+     * @param pageable Pageable object used for pagination
+     * @return page of all owned cards
+     */
     public Page<CashCard> getAllCashCardsByOwner(String owner, Pageable pageable) {
         return repository.findByOwner(owner, PageRequest.of(
                 pageable.getPageNumber(),
@@ -82,6 +102,12 @@ public class CashCardService {
         );
     }
 
+    /**
+     * Finds a cash card using card ID and name of card owner
+     * @param requestedId ID of card
+     * @param name Name of owner
+     * @return optional of cash card
+     */
     public Optional<CashCard> findByIdAndOwner(Long requestedId, String name) {
         return Optional.ofNullable(repository.findByIdAndOwner(requestedId, name));
     }
