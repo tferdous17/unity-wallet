@@ -21,19 +21,37 @@ import java.util.Optional;
 public class CashCardService {
     private final CashCardRepository repository;
 
+    /**
+     * Inject CashCardRepository object
+     * @param repository CashCardRepository object
+     */
     @Autowired
     public CashCardService(CashCardRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Return list of CashCards
+     * @return list of CashCard
+     */
     public List<CashCard> getCashCards() {
         return repository.findAll();
     }
 
+    /**
+     * Creates a new CashCard using the card param passed in
+     * @param card CashCard to create
+     * @return newly created CashCard
+     */
     public CashCard createCashCard(CashCard card) {
         return repository.save(card);
     }
 
+    /**
+     * Allows you to find any CashCard by its ID
+     * @param requestedId id of CashCard to find
+     * @return CashCard if it exists (optional)
+     */
     public Optional<CashCard> findById(Long requestedId) {
         return repository.findById(requestedId);
     }
