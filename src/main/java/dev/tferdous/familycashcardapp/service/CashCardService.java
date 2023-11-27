@@ -34,7 +34,7 @@ public class CashCardService {
      * Return list of CashCards
      * @return list of CashCard
      */
-    public List<CashCard> getCashCards() {
+    public List<CashCard> getAllCashCards() {
         return repository.findAll();
     }
 
