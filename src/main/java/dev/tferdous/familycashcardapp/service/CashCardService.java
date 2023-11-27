@@ -56,10 +56,6 @@ public class CashCardService {
         return repository.findById(requestedId);
     }
 
-    public List<CashCard> getAllCards() {
-        return repository.findAll();
-    }
-
     public ResponseEntity<Void> updateCard(Long id, CashCard card, Principal principal) {
         CashCard cardToUpdate = repository.findByIdAndOwner(id, principal.getName());
         if (cardToUpdate != null) {
