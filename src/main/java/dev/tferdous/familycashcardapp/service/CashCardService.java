@@ -16,6 +16,11 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service layer used to handle the logic for handling HTTP methods and communicate
+ * with the Repository layer
+ * @author Tasnim Ferdous
+ */
 @Service
 @Transactional
 public class CashCardService {
