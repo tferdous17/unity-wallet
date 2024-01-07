@@ -24,18 +24,18 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
-            auth.requestMatchers(HttpMethod.GET, this.baseUrl).hasRole("CARD-OWNER")
-                    .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").hasRole("CARD-OWNER")
-                    .requestMatchers(HttpMethod.POST, this.baseUrl).hasRole("CARD-OWNER")
-                    .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasRole("CARD-OWNER")
-                    .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasRole("CARD-OWNER");
+        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth-> {
+            auth.requestMatchers(HttpMethod.GET, this.baseUrl).hasAnyRole("CARD-OWNER", "ADMIN")
+                    .requestMatchers(HttpMethod.GET, this.baseUrl + "/**").hasAnyRole("CARD-OWNER", "ADMIN")
+                    .requestMatchers(HttpMethod.POST, this.baseUrl).hasAnyRole("CARD-OWNER", "ADMIN")
+                    .requestMatchers(HttpMethod.PUT, this.baseUrl + "/**").hasAnyRole("CARD-OWNER", "ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/**").hasAnyRole("CARD-OWNER", "ADMIN");
         }).httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
-     @Bean
-     public PasswordEncoder passwordEncoder() {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
      }
 
