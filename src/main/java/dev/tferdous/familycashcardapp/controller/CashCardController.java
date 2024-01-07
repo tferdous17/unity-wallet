@@ -20,7 +20,7 @@ import java.util.Optional;
  * @author Tasnim Ferdous
  */
 @RestController
-@RequestMapping("cashcards/v1")
+@RequestMapping("api/cashcards/v1")
 public class CashCardController {
     private final CashCardService cashCardService;
 
