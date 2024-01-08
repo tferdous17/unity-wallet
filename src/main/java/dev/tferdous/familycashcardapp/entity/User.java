@@ -3,13 +3,15 @@ package dev.tferdous.familycashcardapp.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class Customer {
+@Table(name = "users")
+public class User {
     @Id
     @Column(nullable = false, unique = true, updatable = false)
     private Long id;
@@ -29,9 +31,9 @@ public class Customer {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String password;
 
-    public Customer() { }
+    public User() { }
 
-    public Customer(String firstName, String lastName, String username, String email, String password) {
+    public User(String firstName, String lastName, String username, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
