@@ -1,9 +1,6 @@
 package dev.tferdous.familycashcardapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +11,8 @@ import lombok.Setter;
 public class User {
     @Id
     @Column(nullable = false, unique = true, updatable = false)
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private Long id;
 
     @Column(columnDefinition = "TEXT", nullable = false)
