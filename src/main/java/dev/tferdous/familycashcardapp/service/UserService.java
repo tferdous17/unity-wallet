@@ -4,6 +4,7 @@ import dev.tferdous.familycashcardapp.model.entity.User;
 import dev.tferdous.familycashcardapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,14 +19,10 @@ public class UserService {
     }
 
     public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    public Optional<User> findUserByFullName(String firstName, String lastName) {
-        return userRepository.findByFullName(firstName, lastName);
+        return Optional.ofNullable(userRepository.findByEmail(email));
     }
 
     public Optional<User> findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return Optional.ofNullable(userRepository.findByUsername(username));
     }
 }
