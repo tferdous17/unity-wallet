@@ -1,6 +1,6 @@
 package dev.tferdous.familycashcardapp.repository;
 
-import dev.tferdous.familycashcardapp.entity.User;
+import dev.tferdous.familycashcardapp.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

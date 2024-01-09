@@ -1,4 +1,4 @@
-package dev.tferdous.familycashcardapp.entity;
+package dev.tferdous.familycashcardapp.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

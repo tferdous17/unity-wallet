@@ -1,7 +1,6 @@
 package dev.tferdous.familycashcardapp.service;
 
-import dev.tferdous.familycashcardapp.exceptions.CashCardNotFoundException;
-import dev.tferdous.familycashcardapp.entity.CashCard;
+import dev.tferdous.familycashcardapp.model.entity.CashCard;
 import dev.tferdous.familycashcardapp.repository.CashCardRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

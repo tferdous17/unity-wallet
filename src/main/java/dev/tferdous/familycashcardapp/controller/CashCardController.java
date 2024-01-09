@@ -1,6 +1,6 @@
 package dev.tferdous.familycashcardapp.controller;
 
-import dev.tferdous.familycashcardapp.entity.CashCard;
+import dev.tferdous.familycashcardapp.model.entity.CashCard;
 import dev.tferdous.familycashcardapp.service.CashCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

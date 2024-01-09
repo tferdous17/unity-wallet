@@ -1,6 +1,6 @@
 package dev.tferdous.familycashcardapp;
 
-import dev.tferdous.familycashcardapp.entity.CashCard;
+import dev.tferdous.familycashcardapp.model.entity.CashCard;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

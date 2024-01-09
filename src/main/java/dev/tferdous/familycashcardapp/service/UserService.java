@@ -1,6 +1,6 @@
 package dev.tferdous.familycashcardapp.service;
 
-import dev.tferdous.familycashcardapp.entity.User;
+import dev.tferdous.familycashcardapp.model.entity.User;
 import dev.tferdous.familycashcardapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

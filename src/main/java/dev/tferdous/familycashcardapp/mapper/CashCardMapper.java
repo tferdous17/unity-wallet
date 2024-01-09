@@ -1,7 +1,7 @@
 package dev.tferdous.familycashcardapp.mapper;
 
 import dev.tferdous.familycashcardapp.dto.CashCardDTO;
-import dev.tferdous.familycashcardapp.entity.CashCard;
+import dev.tferdous.familycashcardapp.model.entity.CashCard;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
