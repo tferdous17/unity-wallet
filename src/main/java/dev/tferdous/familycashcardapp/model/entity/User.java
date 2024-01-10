@@ -1,5 +1,6 @@
 package dev.tferdous.familycashcardapp.model.entity;
 
+import dev.tferdous.familycashcardapp.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,9 @@ public class User {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role userRole;
+
     public User() { }
 
     public User(String firstName, String lastName, String username, String email, String password) {
@@ -39,5 +43,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName, String username, String email, String password, Role userRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
     }
 }
