@@ -21,7 +21,7 @@ public class RegistrationController {
 
     @RequestMapping("api/cashcards/v1/register")
     public String signupTest() {
-        return "registration";
+        return "registration"; // return registration.html
     }
 
     @PostMapping
