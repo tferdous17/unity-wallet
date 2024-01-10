@@ -2,6 +2,7 @@ package dev.tferdous.familycashcardapp.service;
 
 import dev.tferdous.familycashcardapp.exceptions.EmailAlreadyExistsException;
 import dev.tferdous.familycashcardapp.model.entity.User;
+import dev.tferdous.familycashcardapp.model.enums.Role;
 import dev.tferdous.familycashcardapp.payload.request.UserRegistrationRequest;
 import dev.tferdous.familycashcardapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class RegisterService {
                 request.lastName(),
                 request.username(),
                 request.email(),
-                passwordEncoder.encode(request.password())
+                passwordEncoder.encode(request.password()),
+                Role.USER
         );
 
         userRepository.save(user);
