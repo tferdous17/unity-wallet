@@ -7,6 +7,7 @@ import dev.tferdous.familycashcardapp.payload.request.UserRegistrationRequest;
 import dev.tferdous.familycashcardapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class RegisterService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegisterService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public RegisterService(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
