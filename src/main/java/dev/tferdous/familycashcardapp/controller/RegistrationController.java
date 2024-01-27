@@ -1,5 +1,7 @@
 package dev.tferdous.familycashcardapp.controller;
 
+import dev.tferdous.familycashcardapp.dto.UserDTO;
+import dev.tferdous.familycashcardapp.mapper.UserMapper;
 import dev.tferdous.familycashcardapp.model.entity.User;
 import dev.tferdous.familycashcardapp.payload.request.UserRegistrationRequest;
 import dev.tferdous.familycashcardapp.service.RegisterService;
@@ -36,8 +38,8 @@ public class RegistrationController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        return ResponseEntity.ok(userService.findUserByUsername(username));
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(UserMapper.toDTO(userService.findUserByUsername(username)));
     }
 
 }
