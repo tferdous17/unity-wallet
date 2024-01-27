@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class UserMapper {
 
-    public UserDTO toDTO(User user) {
+    public static UserDTO toDTO(User user) {
         return UserDTO.builder()
                 .id(user.getId())
                 .firstName(user.getFirstName())
