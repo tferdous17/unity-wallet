@@ -12,13 +12,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterService {
+public class AuthService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegisterService(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -29,16 +29,16 @@ public class RegisterService {
     }
 
     public void registerUser(UserRegistrationRequest request) {
-        if (userRepository.findByEmail(request.email()).isPresent()) {
-            throw new EmailAlreadyExistsException(request.email());
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException(request.getEmail());
         }
 
         User user = new User(
-                request.firstName(),
-                request.lastName(),
-                request.username(),
-                request.email(),
-                passwordEncoder.encode(request.password()),
+                request.getFirstName(),
+                request.getLastName(),
+                request.getUsername(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
                 Role.USER
         );
 

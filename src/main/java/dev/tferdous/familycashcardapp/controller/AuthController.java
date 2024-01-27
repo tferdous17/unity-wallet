@@ -2,9 +2,8 @@ package dev.tferdous.familycashcardapp.controller;
 
 import dev.tferdous.familycashcardapp.dto.UserDTO;
 import dev.tferdous.familycashcardapp.mapper.UserMapper;
-import dev.tferdous.familycashcardapp.model.entity.User;
 import dev.tferdous.familycashcardapp.payload.request.UserRegistrationRequest;
-import dev.tferdous.familycashcardapp.service.RegisterService;
+import dev.tferdous.familycashcardapp.service.AuthService;
 import dev.tferdous.familycashcardapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/cashcards/v1/register")
-public class RegistrationController {
+@RequestMapping("api/cashcards/v1/auth")
+public class AuthController {
 
-    private final RegisterService registerService;
+    private final AuthService authService;
     private final UserService userService;
 
     @Autowired
-    public RegistrationController(RegisterService registerService, UserService userService) {
-        this.registerService = registerService;
+    public AuthController(AuthService authService, UserService userService) {
+        this.authService = authService;
         this.userService = userService;
     }
 
@@ -31,9 +30,9 @@ public class RegistrationController {
 //        return "registration"; // return registration.html
 //    }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@RequestBody UserRegistrationRequest request) {
-        registerService.registerUser(request);
+        authService.registerUser(request);
         return ResponseEntity.ok().build();
     }
 
