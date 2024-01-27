@@ -1,10 +1,15 @@
 package dev.tferdous.familycashcardapp.payload.request;
 
-public record UserRegistrationRequest(
-        String firstName,
-        String lastName,
-        String username,
-        String email,
-        String password
-) {
+import lombok.*;
+
+@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserRegistrationRequest {
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String email;
+    private String password;
 }
