@@ -2,6 +2,7 @@ package dev.tferdous.familycashcardapp.controller;
 
 import dev.tferdous.familycashcardapp.dto.UserDTO;
 import dev.tferdous.familycashcardapp.mapper.UserMapper;
+import dev.tferdous.familycashcardapp.model.entity.User;
 import dev.tferdous.familycashcardapp.payload.request.UserRegistrationRequest;
 import dev.tferdous.familycashcardapp.service.AuthService;
 import dev.tferdous.familycashcardapp.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("api/cashcards/v1/auth")
@@ -39,6 +41,11 @@ public class AuthController {
     @GetMapping("/{username}")
     public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
         return ResponseEntity.ok(UserMapper.toDTO(userService.findUserByUsername(username)));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllRegisteredUsers() {
+        return ResponseEntity.ok(userService.retrieveAllUsers().stream().map(UserMapper::toDTO).toList());
     }
 
 }
