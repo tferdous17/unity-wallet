@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("api/cashcards/v1/auth")
@@ -33,9 +32,8 @@ public class AuthController {
 //    }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> registerUser(@RequestBody UserRegistrationRequest request) {
-        authService.registerUser(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> registerUser(@RequestBody UserRegistrationRequest request) {
+        return ResponseEntity.ok(authService.registerUser(request));
     }
 
     @GetMapping("/{username}")
