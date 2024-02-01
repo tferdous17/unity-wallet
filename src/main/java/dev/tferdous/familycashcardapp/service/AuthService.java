@@ -28,7 +28,7 @@ public class AuthService {
         return new BCryptPasswordEncoder();
     }
 
-    public void registerUser(UserRegistrationRequest request) {
+    public String registerUser(UserRegistrationRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException(request.getEmail());
         }
@@ -43,6 +43,8 @@ public class AuthService {
         );
 
         userRepository.save(user);
+
+        return "User successfully registered.";
     }
 
 }
