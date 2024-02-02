@@ -11,32 +11,32 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleCashCardNotFoundException(CashCardNotFoundException exception) {
         ErrorResponse response = ErrorResponse.builder()
                 .message(exception.getMessage())
-                .status(HttpStatus.CONFLICT)
-                .statusCode(HttpStatus.CONFLICT.value())
+                .status(CashCardNotFoundException.STATUS)
+                .statusCode(CashCardNotFoundException.STATUS.value())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.status(CashCardNotFoundException.STATUS).body(response);
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<Object> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception) {
         ErrorResponse response = ErrorResponse.builder()
                 .message(exception.getMessage())
-                .status(HttpStatus.CONFLICT)
-                .statusCode(HttpStatus.CONFLICT.value())
+                .status(EmailAlreadyExistsException.STATUS)
+                .statusCode(EmailAlreadyExistsException.STATUS.value())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.status(EmailAlreadyExistsException.STATUS).body(response);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
         ErrorResponse response = ErrorResponse.builder()
                 .message(exception.getMessage())
-                .status(HttpStatus.NOT_FOUND)
-                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(UserNotFoundException.STATUS)
+                .statusCode(UserNotFoundException.STATUS.value())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        return ResponseEntity.status(UserNotFoundException.STATUS).body(response);
     }
 }
