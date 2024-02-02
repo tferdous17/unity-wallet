@@ -7,6 +7,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(CashCardNotFoundException.class)
+    public ResponseEntity<Object> handleCashCardNotFoundException(CashCardNotFoundException exception) {
+        ErrorResponse response = ErrorResponse.builder()
+                .message(exception.getMessage())
+                .status(HttpStatus.CONFLICT)
+                .statusCode(HttpStatus.CONFLICT.value())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
         ErrorResponse response = ErrorResponse.builder()
